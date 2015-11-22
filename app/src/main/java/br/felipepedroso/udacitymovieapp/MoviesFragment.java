@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,34 +32,14 @@ import java.util.Arrays;
  * create an instance of this fragment.
  */
 public class MoviesFragment extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-
+    private MoviesAdapter moviesAdapter;
 
     public MoviesFragment() {
     }
 
     public static MoviesFragment newInstance() {//(String param1, String param2) {
         MoviesFragment fragment = new MoviesFragment();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     @Override
@@ -77,6 +58,9 @@ public class MoviesFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
 
+        GridView gridView = (GridView) view.findViewById(R.id.gridview_movies);
+        moviesAdapter = new MoviesAdapter(getContext());
+        gridView.setAdapter(moviesAdapter);
 
         return view;
     }
@@ -169,6 +153,17 @@ public class MoviesFragment extends Fragment {
             }
 
             return movieInfos;
+        }
+
+        @Override
+        protected void onPostExecute(MovieInfo[] movieInfos) {
+            if (moviesAdapter != null){
+                moviesAdapter.clear();
+
+                for (MovieInfo movieInfo : movieInfos){
+                    moviesAdapter.add(movieInfo);
+                }
+            }
         }
     }
 
