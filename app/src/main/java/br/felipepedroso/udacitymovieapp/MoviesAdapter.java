@@ -5,7 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by FelipeAugusto on 22/11/2015.
@@ -25,11 +29,9 @@ public class MoviesAdapter extends ArrayAdapter<MovieInfo> {
 
         MovieInfo movieInfo = getItem(position);
 
-        ProgressBar progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
-
-        TMDBImageView imageView = (TMDBImageView) convertView.findViewById(R.id.moviePoster);
-        imageView.setProgressBar(progressBar);
-        imageView.setImageUrl(TMDB_IMAGE_BASE_URL + movieInfo.getPosterPath());
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.moviePoster);
+        Picasso.with(getContext()).load(TMDB_IMAGE_BASE_URL + movieInfo.getPosterPath()).into(imageView);
+        convertView.setLayoutParams(new GridView.LayoutParams(300, 400));
 
         return convertView;
     }

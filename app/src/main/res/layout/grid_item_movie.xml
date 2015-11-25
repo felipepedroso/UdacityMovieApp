@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:backgroundTint="@android:color/black">
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible"/>
-
-    <br.felipepedroso.udacitymovieapp.TMDBImageView
+    <ImageView
         android:id="@+id/moviePoster"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        />
+        android:scaleType="centerCrop" />
+
 </FrameLayout>
