@@ -1,6 +1,7 @@
 package br.felipepedroso.udacitymovieapp;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import org.json.JSONArray;
@@ -61,6 +63,18 @@ public class MoviesFragment extends Fragment {
         GridView gridView = (GridView) view.findViewById(R.id.gridview_movies);
         moviesAdapter = new MoviesAdapter(getContext());
         gridView.setAdapter(moviesAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                MovieInfo movieInfo = (MovieInfo) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(MoviesFragment.this.getActivity(),DetailsActivity.class);
+                intent.putExtra(DetailsFragment.MOVIE_INFO_KEY, movieInfo);
+
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

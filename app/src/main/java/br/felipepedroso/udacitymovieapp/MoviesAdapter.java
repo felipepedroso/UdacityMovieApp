@@ -14,8 +14,6 @@ import com.squareup.picasso.Picasso;
  * Created by FelipeAugusto on 22/11/2015.
  */
 public class MoviesAdapter extends ArrayAdapter<MovieInfo> {
-    private String TMDB_IMAGE_BASE_URL = "http://image.tmdb.org/t/p/w500";
-
     public MoviesAdapter(Context context) {
         super(context, R.layout.grid_item_movie);
     }
@@ -29,7 +27,7 @@ public class MoviesAdapter extends ArrayAdapter<MovieInfo> {
         MovieInfo movieInfo = getItem(position);
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.moviePoster);
-        Picasso.with(getContext()).load(TMDB_IMAGE_BASE_URL + movieInfo.getPosterPath()).into(imageView);
+        Picasso.with(getContext()).load(getContext().getString(R.string.tmdb_image_base_url) + movieInfo.getPosterPath()).into(imageView);
 
         TextView titleView = (TextView) convertView.findViewById(R.id.movieTitle);
         titleView.setText(movieInfo.getTitle());
