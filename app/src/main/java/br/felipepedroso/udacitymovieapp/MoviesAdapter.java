@@ -5,9 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +30,9 @@ public class MoviesAdapter extends ArrayAdapter<MovieInfo> {
 
         ImageView imageView = (ImageView) convertView.findViewById(R.id.moviePoster);
         Picasso.with(getContext()).load(TMDB_IMAGE_BASE_URL + movieInfo.getPosterPath()).into(imageView);
-        convertView.setLayoutParams(new GridView.LayoutParams(300, 400));
+
+        TextView titleView = (TextView) convertView.findViewById(R.id.movieTitle);
+        titleView.setText(movieInfo.getTitle());
 
         return convertView;
     }
